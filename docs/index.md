@@ -9,5 +9,6 @@
 # 博客
 ## Spring系列
 1. Spring中毒太深，离开Spring我居然连最基本的接口都不会写了
+
 ## RabbitMQ系列
 1. 一文带你从入门RabbitMQ到快速掌握RabbitMQ原理

@@ -4,7 +4,7 @@
 
 亦余心之所善兮，虽九死其犹未悔！  -- **屈原《离骚》**
 
-GitHub会陆续整理记录日常总结，欢迎star！
+GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/zhouwenxing/zhouwenxing.github.io) ！
 
 # 已收录博文技术栈(持续更新)
 1. 后台框架：Spring

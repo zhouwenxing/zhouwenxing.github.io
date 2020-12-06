@@ -64,7 +64,7 @@
 
 下图就是一个 `AMQP` 模型简图，理解了这幅图，那么就基本理解了 `RabbitMQ` 的工作模式。
 
-![AMQP-0-9-1模型](image/AMQP-0-9-1.png)
+![AMQP-0-9-1模型](image/1/AMQP-0-9-1.png)
 
 ### Producer 和 Consumer 
 
@@ -130,7 +130,7 @@ source /etc/profile //实时生效
 
 3. 输入 `erl` 验证 `Erlang` 是否安装成功。如果出现如下显示版本号的界面则说明安装成功（可以输入 `halt().` 命令进行退出）：
 
-![验证erl](image/验证erlang安装.png)
+![验证erl](image/1/验证erlang安装.png)
 
 4. 安装 `RabbitMQ`：
 
@@ -170,13 +170,13 @@ source /etc/profile //实时生效
 
 9. 开启插件之后，可以通过访问：`http://ip:15672/` 访问后台管理系统，并进行一些参数设置，账号密码就是上面添加的 `admin/123456`。
 
-![RabbitMQ后台管理系统](image/RabbitMQ后台管理系统.png)
+![RabbitMQ后台管理系统](image/1/RabbitMQ后台管理系统.png)
 
 ### 安装过程常见错误
 
 安装过程中可能会出现如下图所示错误：
 
-![图1](image/安装RabbitMQ缺少依赖.png)
+![图1](image/1/安装RabbitMQ缺少依赖.png)
 
 1. odbc:ODBC library - link check failed：
 
@@ -276,7 +276,7 @@ public class TestRabbitProducter {
 
 4. 先启动消费者，启动之后消费者就会保持和 `RabbitMQ` 的连接，等待消息；然后再运行生产者，消息发送之后，消费者就可以收到消息：
 
-![运行结果](image/Java API运行结果.png)
+![运行结果](image/1/Java API运行结果.png)
 
 ## 利用SpringBoot 实现一个生产者和消费者
 

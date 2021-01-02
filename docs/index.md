@@ -14,7 +14,7 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 
 # 博客
 ## Spring系列
-1. [Spring中毒太深，离开Spring我居然连最基本的接口都不会写了](https://zhouwenxing.github.io/spring/Spring%E4%B8%AD%E6%AF%92%E5%A4%AA%E6%B7%B1%EF%BC%8C%E7%A6%BB%E5%BC%80Spring%E6%88%91%E5%B1%85%E7%84%B6%E8%BF%9E%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%8E%A5%E5%8F%A3%E9%83%BD%E4%B8%8D%E4%BC%9A%E5%86%99%E4%BA%86)
+1. [Spring中毒太深，离开Spring我居然连最基本的接口都不会写了](https://zhouwenxing.github.io/spring/Spring中毒太深，离开Spring我居然连最基本的接口都不会写了)
 
 ## RabbitMQ系列
 1. [RabbitMQ，想说爱你不容易](https://zhouwenxing.github.io//mq/rabbitmq/RabbitMQ，想说爱你不容易(附详细安装教程))

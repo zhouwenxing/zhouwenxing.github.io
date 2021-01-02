@@ -171,19 +171,19 @@ public class HelloServlet extends HttpServlet {
 
 - 4、执行 `maven` 打包命令，确认成功打包成 `war` 包：
 
-![](image/war包.png)
+![](image/1/war包.png)
 
 - 5、`RUN-->Edit Configurations`，然后点击左上角的 `+` 号，新建一个 `Tomcat Server`，如果是第一次配置，默认没有 `Tomcat Server` 选项，需要点击底部的 `xx more items...`：
 
-![](image/tomcat.png)
+![](image/1/tomcat.png)
 
 - 6、点击右边的 `Deployment`，然后按照下图依次点击，最后在弹框内找到上面打包好的 `war` 包文件：
 
-![部署tomcat](image/deployment.png)
+![部署tomcat](image/1/deployment.png)
 
 - 7、选中之后，需要注意的是，下面 `Application Context` 默认会带上 `war` 包名，为了方便，我们需要把它删掉，即不用上下文路径，只保留一个根路径 `/` （当然上下文也可以保留，但是每次请求都要带上这一部分）， 再选择 `Apply`，点击 `OK`，即可完成部署：
 
-![](image/deployment-apply.png)
+![](image/1/deployment-apply.png)
 
 - 8、最后我们在浏览器输入请求路径`http://localhost:8080/hello?name=双子孤狼`，即可得到返回：`Hello：双子孤狼`。
 

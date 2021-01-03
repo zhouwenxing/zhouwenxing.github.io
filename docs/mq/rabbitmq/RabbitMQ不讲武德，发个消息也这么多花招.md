@@ -1,8 +1,8 @@
 # 前言
 
 ```properties
-本篇博客已被收入GitHub：https://zhouwenxing.github.io/
-文中所涉及的源码也已被收入 GitHub：https://github.com/zhouwenxing/lonely-wolf-note (message-mq模块)
+本篇博客已被收录GitHub：https://zhouwenxing.github.io/
+文中所涉及的源码也已被收录GitHub：https://github.com/zhouwenxing/lonely-wolf-note (message-mq模块)
 ```
 
 

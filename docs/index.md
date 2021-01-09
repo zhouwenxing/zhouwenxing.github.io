@@ -11,6 +11,7 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 # 已收录博文技术栈(持续更新)
 1. 后台框架：Spring
 2. 消息队列：RabbitMQ
+3. 数据库：Redis
 
 # 博客
 ## Spring系列
@@ -19,4 +20,8 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 ## RabbitMQ系列
 1. [RabbitMQ，想说爱你不容易](https://zhouwenxing.github.io//mq/rabbitmq/RabbitMQ，想说爱你不容易(附详细安装教程))
 2. [RabbitMQ不讲武德，发个消息也这么多花招](https://zhouwenxing.github.io//mq/rabbitmq/RabbitMQ不讲武德，发个消息也这么多花招)
+
+# Redis系列
+
+1. [Redis为什么这么快](https://zhouwenxing.github.io//redis/Redis为什么这么快)
 

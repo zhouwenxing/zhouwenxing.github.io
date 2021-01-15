@@ -24,5 +24,5 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 # Redis系列
 
 1. [Redis为什么这么快](https://zhouwenxing.github.io/redis/Redis为什么这么快)
-
 2. [一个简单的字符串，为什么 Redis 要设计的如此特别](https://zhouwenxing.github.io/redis/一个简单的字符串，为什么 Redis 要设计的如此特别)
+3. [牺牲速度来节省内存，Redis是觉得自己太快了吗](https://zhouwenxing.github.io/redis/牺牲速度来节省内存，Redis是觉得自己太快了吗)

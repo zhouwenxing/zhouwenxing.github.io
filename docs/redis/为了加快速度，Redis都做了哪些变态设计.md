@@ -45,7 +45,7 @@ typedef struct list {
 
 ## ziplist
 
-压缩列表在前面已经介绍过，想要详细了解的可以[点击这里](https://zhouwenxing.github.io/redis/为了加快速度，Redis都做了哪些"变态"设计)。
+压缩列表在前面已经介绍过，想要详细了解的可以[点击这里](https://zhouwenxing.github.io/redis/牺牲速度来节省内存，Redis是觉得自己太快了吗)。
 
 ## linkedlist 和 ziplist 的选择
 

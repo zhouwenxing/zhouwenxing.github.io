@@ -27,3 +27,4 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 2. [一个简单的字符串，为什么 Redis 要设计的如此特别](https://zhouwenxing.github.io/redis/一个简单的字符串，为什么 Redis 要设计的如此特别)
 3. [牺牲速度来节省内存，Redis是觉得自己太快了吗](https://zhouwenxing.github.io/redis/牺牲速度来节省内存，Redis是觉得自己太快了吗)
 4. [为了加快速度，Redis 都做了哪些“变态”设计](https://zhouwenxing.github.io/redis/为了加快速度，Redis都做了哪些"变态"设计)
+

@@ -45,7 +45,7 @@ typedef struct list {
 
 ## ziplist
 
-压缩列表在前面已经介绍过，想要详细了解的可以[点击这里](https://zhouwenxing.github.io/redis/牺牲速度来节省内存，Redis是觉得自己太快了吗)。
+压缩列表在前面已经介绍过，想要详细了解的可以[点击这里](https://zhouwenxing.github.io/redis/为了加快速度，Redis 都做了哪些"变态"设计)。
 
 ## linkedlist 和 ziplist 的选择
 
@@ -124,8 +124,8 @@ typedef struct quicklistLZF {
 
 `quicklist` 同样采用了 `linkedlist` 的双端列表特性，然后 `quicklist` 中的每个节点又是一个 `ziplist`，所以`quicklist` 就是综合平衡考虑了 `linkedlist` 容易产生空间碎片的问题和 `ziplist` 的读写性能两个维度而设计出来的一种数据结构。使用 `quicklist` 需要注意以下 `2` 点：
 
- - 1、如果 `ziplist` 中的 `entry` 个数过少，最极端情况就是只有 `1` 个 `entry` 的压缩列表，那么此时 `quicklist` 就相当于退化成了一个普通的 `linkedlist`。
- - 2、如果 `ziplist` 中的 `entry` 过多，那么也会导致一次性需要申请的内存空间过大（`ziplist` 空间是连续的），而且因为 `ziplist` 本身的就是以时间换空间，所以会过多 `entry` 也会影响到列表对象的读写性能。
+ - 如果 `ziplist` 中的 `entry` 个数过少，最极端情况就是只有 `1` 个 `entry` 的压缩列表，那么此时 `quicklist` 就相当于退化成了一个普通的 `linkedlist`。
+ - 如果 `ziplist` 中的 `entry` 过多，那么也会导致一次性需要申请的内存空间过大（`ziplist` 空间是连续的），而且因为 `ziplist` 本身的就是以时间换空间，所以会过多 `entry` 也会影响到列表对象的读写性能。
 
 `ziplist` 中的 `entry` 个数可以通过参数 `list-max-ziplist-size` 来控制：
 

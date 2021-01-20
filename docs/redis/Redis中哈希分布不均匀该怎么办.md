@@ -49,9 +49,10 @@ typedef struct dictType {
 ![](image/5/hash存储结构示意图.png)
 
 ### rehash 操作
+
 `dict` 中定义了一个数组 `ht[2]`，`ht[2]` 中定义了两个哈希表：`ht[0]` 和 `ht[1]`。而 `Redis` 在默认情况下只会使用 `ht[0]`，并不会使用 `ht[1]`，也不会为 `ht[1]` 初始化分配空间。
 
-当设置一个哈希对象时，具体会落到哈希数组（上图中的 `dictEntry[3]`）中的哪个下标，是通过计算哈希值来确定的，如果发生哈希碰撞，那么同一个下标就会有多个 `dictEntry`，从而形成一个链表（上图中最右边指向 `NULL` 的位置），不过需要注意的是最后插入元素的总是落在链表的最前面（即发生哈希冲突时，总是将节点往链表的头部放）。
+当设置一个哈希对象时，具体会落到哈希数组（上图中的 `dictEntry[3]`）中的哪个下标，是通过计算哈希值来确定的。如果发生哈希碰撞（计算得到的哈希值一致），那么同一个下标就会有多个 `dictEntry`，从而形成一个链表（上图中最右边指向 `NULL` 的位置），不过需要注意的是最后插入元素的总是落在链表的最前面（即发生哈希冲突时，总是将节点往链表的头部放）。
 
 当读取数据的时候遇到一个节点有多个元素，就需要遍历链表，故链表越长，性能越差。为了保证哈希表的性能，需要在满足以下两个条件中的一个时，对哈希表进行 `rehash`（重新散列）操作：
 
@@ -77,7 +78,8 @@ PS：负载因子 = 哈希表已使用节点数 / 哈希表大小（即：`h[0].
 
 当正在执行 `rehash`操作时，如果服务器收到来自客户端的命令请求操作，则**会先查询 `ht[0]`，查找不到结果再到`ht[1]` 中查询**。
 ## ziplist
-关于 `ziplist` 的一些特性，之前的文章中有单独进行过分析，想要详细了解的，可以[点击这里](https://blog.csdn.net/zwx900102/article/details/109595508)。但是需要注意的是哈希对象中的 `ziplist` 和列表对象中 `ziplist` 的有一点不同就是哈希对象是一个 `key-value` 形式，所以其 `ziplist` 中也表现为 `key-value`，`key` 和 `value` 紧挨在一起：
+关于 `ziplist` 的一些特性，之前的文章中有单独进行过分析，想要详细了解的，可以[点击这里](https://zhouwenxing.github.io/redis/牺牲速度来节省内存，Redis是觉得自己太快了吗)。但是需要注意的是哈希对象中的 `ziplist` 和列表对象中 `ziplist` 的有一点不同就是哈希对象是一个 `key-value` 形式，所以其 `ziplist` 中也表现为 `key-value`，`key` 和 `value` 紧挨在一起：
+
 ![ziplist-hash](image/5/ziplist-hash.png)
 
 ## ziplist 和 hashtable 的编码转换
@@ -118,12 +120,14 @@ object encoding address
 
 可以看到当我们的哈希对象中只有一个键值对的时候，底层编码是 `ziplist`。
 
+现在我们将 `hash-max-ziplist-entries` 参数改成 `2`，然后重启 `Redis`，最后再输入如下命令进行测试：
+
 ```java
 hmset key field1 value1 field2 value2 field3 value3
 object encoding key
 ```
 
-现在我们将 `hash-max-ziplist-entries` 参数改成 `2`，然后重启 `Redis`，最后再输入如下命令进行测试：
+输出之后得到如下结果：
 
 ![](image/5/实战2.png)
 

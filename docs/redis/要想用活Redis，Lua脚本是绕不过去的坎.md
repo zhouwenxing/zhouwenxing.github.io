@@ -2,14 +2,11 @@
 
 # 前言
 
-`Redis` 当中提供了许多重要的高级特性，比如发布与订阅，`Lua` 脚本等。`Redis` 当中提供了自增的原子命令，但是假如我们需要同时执行好几个命令的同时又想让这些命令保持原子性，该怎么办呢？
-
-# 发布与订阅
-理论上来说通过双端链表就可以实现发布与订阅功能，但是这种通过链表来实现的发布与订阅功能有两个局限性：
+`Redis` 当中提供了许多重要的高级特性，比如发布与订阅，`Lua` 脚本等。`Redis` 当中也提供了自增的原子命令，但是假如我们需要同时执行好几个命令的同时又想让这些命令保持原子性，该怎么办呢？这时候就可以使用本文介绍的 `Lua` 脚本来实现。
 
 # 发布与订阅
 发布与订阅功能理论上来说可以直接通过一个双端链表就可以实现了，然而这种通过普通的双端链表来实现的发布与订阅功能有两个局限性：
-- 如果生产者生产消息的速度远大于消费者消费消息的速度，那么链表中未消费的消息会占用大量的内存。
+- 如果生产者生产消息的速度远大于消费者消费消息的速度，那么链表中未消费的消息会大量堆积，导致占用大量的内存。
 - 基于链表实现的消息队列，不支持一对多的消息分发。
 
 因为普通双端链表来实现发布与订阅功能有这两个局限性，故而 `Redis` 当中并没有直接通过双端列表来实现。在 `Redis` 中的发布与订阅可以分为两种类型：**基于频道**和**基于模式**。
@@ -17,7 +14,7 @@
 ## 基于频道的实现
 基于频道的实现方式主要通过以下三个命令：
 - subscribe channel-1 channel-2：订阅一个或者多个频道。
-- unsubscribe channel-1：取消频道的订阅（基于命令操作，界面上无法退订）。
+- unsubscribe channel-1：取消频道的订阅（命令操作界面上无法退订）。
 - publish channel-1 message：向频道 `channel-1` 发送消息 `message`。
 
 打开一个客户端 一，输入订阅命令 `subscribe music movie`，表示当前客户端订阅了 `music` 和 `movie` 两个频道的消息：
@@ -40,10 +37,10 @@ publish tv myHome  //发布消息 myHome 到 tv 频道
 
 ![](image/7/channel-subscribe-result.png)
 
-同时，还有以下 `2` 个命令可以查看当前客户端订阅的频道信息
+同时，还有以下 `2` 个命令可以查看当前客户端订阅的频道信息：
 
 - punsub channels [channel_name] ：查看当前服务器被订阅的频道。不带参数则返回所有频道，后面的参数可以使用通配符 `?` 或者 `*`。
-- pubsub numsub channel-1 channel-2：查看指定频道的订阅数。
+- pubsub numsub channel_name [channel_name]：查看指定频道的订阅数（可同时查看多个）。
 ### 实现原理分析
 客户端与其订阅的频道信息被保存在 `redisServer` 对象中的 `pubsub_channels` 属性中。
 ```c
@@ -84,7 +81,7 @@ publish tv myHome  //发布消息 myHome 到 tv 频道
 
 前面两个频道发布之后返回 `1` 就表示当前有 `1` 个客户端订阅了该频道（上面基于频道订阅的客户端关闭之后会自动取消订阅），消息已经发送到这个客户端。
 
-这时候我们再回到之前的客户端一，就会发现客户端一收到了消息 `myCountry` 和 `love` 两条消息，因为这两个频道都是以 `m` 开头的，而 `myHome` 这条消息是属于频道 `tv`，客户端一并没有订阅，故而不会收到：
+这时候我们再回到之前的客户端一，就会发现客户端一收到了 `myCountry` 和 `love` 两条消息，因为这两个频道都是以 `m` 开头的，而 `myHome` 这条消息是属于频道 `tv`，并不是以 `m` 开头，客户端一并没有订阅，故而不会收到：
 
 ![](image/7/pattern-channel-result.png)
 
@@ -100,6 +97,7 @@ struct redisServer {
 };
 ```
 `pubsub_patterns` 属性是一个列表，其列表内结构（源码 `serer.h` 内）定义如下：
+
 ```c
 typedef struct pubsubPattern {
     client *client;//订阅模式的客户端
@@ -114,7 +112,7 @@ typedef struct pubsubPattern {
 - 发送消息
 此时需要遍历整个链表来寻找能匹配的模式。之所以基于模式场景使用链表是因为模式支持通配符，所以没有办法直接用字典实现。
 
-PS：当基于频道和基于模式两种订阅都存在时，`Redis` 会先去寻找频道字典，再去遍历模式链表进行消息发送。
+PS：当基于频道和基于模式两种订阅同时都存在时，`Redis` 会先去寻找频道字典，再去遍历模式链表进行消息发送。
 # Lua 脚本
 `Redis` 从 `2.6` 版本开始支持 `Lua` 脚本，为了支持 `Lua` 脚本，`Redis` 在服务器中嵌入了 `Lua` 环境。
 
@@ -126,7 +124,7 @@ PS：当基于频道和基于模式两种订阅都存在时，`Redis` 会先去�
 eval lua-script numkeys key [key ...] arg [arg ...]
 ```
 - eval：执行 `Lua` 脚本的命令。
-- lua-script：`Lua` 脚本内容
+- lua-script：`Lua` 脚本内容。
 - numkeys：表示的是 `Lua` 脚本中需要用到多少个 `key`，如果没用到则写 `0`。
 - key [key ...]：将 `key` 作为参数按顺序传递到 `Lua` 脚本，`numkeys` 是 `0` 时则可省略。
 - arg：`Lua` 脚本中用到的参数，如果没有可省略。
@@ -134,7 +132,7 @@ eval lua-script numkeys key [key ...] arg [arg ...]
 接下来我们执行一个不带任何参数的简单 `Lua` 脚本命令：
 
 ```java
-`eval "return 'Hello Redis'" 0`
+eval "return 'Hello Redis'" 0
 ```
 
 
@@ -161,7 +159,7 @@ eval "return redis.call('set',KEYS[1],ARGV[1])" 1 name lonely_wolf
 需要注意的是：**`KEYS` 和 `ARGV` 必须要大写，参数的下标从 `1` 开始**。上面命令中 `1` 表示当前需要传递 `1` 个 `key`
 
 ### Lua 脚本摘要
-有时候如果我们执行的一个 `Lua` 脚本很长的话，那么直接这么调用 `Lua` 脚本的话非常不方便，所以 `Redis` 当中提供了一个命令 `script load` 来为手动给每一个 `Lua` 脚本生成摘要，**这里之所以要说手动的原因是即使我们不使用这个命令，每次调用完 `Lua` 脚本的时候，`Redis` 也会为每个 `Lua` 脚本生成一个摘要**。
+有时候如果我们执行的一个 `Lua` 脚本很长的话，那么直接这么调用 `Lua` 脚本的话非常不方便，所以 `Redis` 当中提供了一个命令 `script load` 来手动给每一个 `Lua` 脚本生成摘要，**这里之所以要说手动的原因是即使我们不使用这个命令，每次调用完 `Lua` 脚本的时候，`Redis` 也会为每个 `Lua` 脚本生成一个摘要**。
 
 其他相关命令：
 
@@ -225,7 +223,7 @@ get name
 
 ![Lua-blocking](image/7/Lua-blocking.png)
 
-提示 `busy` 之后，又给出了解决方案，我们只能只用 `script kill` 或者 `shutdown nosave` 命令，这两个命令又是做什么用的呢？
+提示 `busy` 之后，同时 `Redis` 也给出了解决方案，我们只能只用 `script kill` 或者 `shutdown nosave` 命令，这两个命令又是做什么用的呢？
 
 - script kill：当脚本陷入死循环之后，执行这个命令可以强制 `Lua` 脚本中断执行。这个脚本的局限性就是当前陷入死循环的 `Lua` 脚本必须没有成功执行过命令。
 - shutdown nosave：强制退出 `Lua` 脚本，可以解决 `script kill` 命令的局限性。
@@ -234,7 +232,9 @@ get name
 
 ![](image/7/script-kill.png)
 
-然后我们重新用客户端一执行下面这个 `Lua` 脚本，这个脚本和上面的脚本区别就是这里执行成功了一个 `Redis` 命令之后才开始死循环：
+可以看到，客户端一的 `Lua` 脚本已经退出了，根据后面的提示可以知道就是因为执行了 `script kill` 命令而导致了 `Lua` 脚本的中断。
+
+现在我们重新用客户端一执行下面这个 `Lua` 脚本，这个脚本和上面的脚本区别就是这里执行成功了一个 `Redis` 命令之后才开始死循环：
 
 ```java
 eval "redis.call('set','age','28') while true do end" 0
@@ -250,7 +250,7 @@ eval "redis.call('set','age','28') while true do end" 0
 ![shutdown-nosave](image/7/shutdown-nosave.png)
 
 #### 为什么可以执行 script kill 命令
-`Redis` 当中执行指令是单线程的，那么为什么 `Lua` 脚本陷入死循环之后其他客户端还可以执行 `script kill` 命令呢？
+`Redis` 当中执行命令是单线程的，那么为什么 `Lua` 脚本陷入死循环之后其他客户端还可以执行 `script kill` 命令呢？
 
 这是因为 `Lua` 脚本引擎提供了钩子（hook）函数，它允许在内部虚拟机执行指令时运行钩子代码，所以 `Redis` 正是利用了这一原理，在执行 `Lua` 脚本之前设置了一个钩子，也就是说 `script kill` 命令是通过钩子（hook）函数来执行的。
 # 总结

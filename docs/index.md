@@ -28,4 +28,5 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 3. [牺牲速度来节省内存，Redis是觉得自己太快了吗](https://zhouwenxing.github.io/redis/牺牲速度来节省内存，Redis是觉得自己太快了吗)
 4. [为了加快速度，Redis 都做了哪些“变态”设计](https://zhouwenxing.github.io/redis/为了加快速度，Redis都做了哪些变态设计)
 5. [Redis中哈希分布不均匀该怎么办](https://zhouwenxing.github.io/redis/Redis中哈希分布不均匀该怎么办)
+6. [同一份数据，Redis为什么要存两次](https://zhouwenxing.github.io/redis/同一份数据，Redis为什么要存两次)
 

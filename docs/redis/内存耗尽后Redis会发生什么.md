@@ -1,5 +1,3 @@
-[TOC]
-
 # 前言
 
 作为一台服务器来说，内存并不是无限的，所以总会存在内存耗尽的情况，那么当 `Redis` 服务器的内存耗尽后，如果继续执行请求命令，`Redis` 会如何处理呢？
@@ -36,7 +34,7 @@ typedef struct redisDb {
    //... 省略了其他属性
 } redisDb;
 ```
-## 淘汰策略
+## 8 种淘汰策略
 假如 `Redis` 当中所有的键都没有过期，而且此时内存满了，那么客户端继续执行 `set` 等命令时 `Redis` 会怎么处理呢？`Redis` 当中提供了不同的淘汰策略来处理这种场景。
 
 首先 `Redis` 提供了一个参数 `maxmemory` 来配置 `Redis` 最大使用内存：
@@ -83,9 +81,10 @@ PS：淘汰策略也可以直接使用命令 `config set maxmemory-policy <策�
 
   
 
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/2020110814571911.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p3eDkwMDEwMg==,size_16,color_FFFFFF,t_70#pic_center)
+  ![淘汰抽样对比](image/9/淘汰抽样对比.png)
 
-  左上角第一幅图代表的是传统 `LRU` 算法，可以看到，当抽样数达到 `10` 个（右上角），已经和传统的 `LRU` 算法非常接近了。
+左上角第一幅图代表的是传统 `LRU` 算法，可以看到，当抽样数达到 `10` 个（右上角），已经和传统的 `LRU` 算法非常接近了。
+
 ### Redis 如何管理热度数据
 前面我们讲述字符串对象时，提到了 `redisObject` 对象中存在一个 `lru` 属性：
 ```c
@@ -124,7 +123,7 @@ typedef struct redisObject {
 
 1. 提取 `0` 和 `1` 之间的随机数 `R`。
 2. `counter` - 初始值（默认为 `5`），得到一个基础差值，如果这个差值小于 `0`，则直接取 `0`，为了方便计算，把这个差值记为 `baseval`。 
-3. 概率 `P` 计算公式为：`1/(baseval * lfu_log_factor + 1)`。为了防止
+3. 概率 `P` 计算公式为：`1/(baseval * lfu_log_factor + 1)`。
 4. 如果 `R < P` 时，频次进行递增（`counter++`）。
 
 公式中的 `lfu_log_factor` 称之为对数因子，默认是 `10` ，可以通过参数来进行控制：
@@ -133,9 +132,9 @@ lfu_log_factor 10
 ```
 下图就是对数因子 `lfu_log_factor` 和频次 `counter` 增长的关系图：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201111220159592.png#pic_center)
+![lfu_log_factor](image/9/lfu_log_factor.png)
 
-可以看到，当对数因子 `lfu_log_factor` 为 `100` 时，`10M（1000万）`次访问才会将访问 `counter` 增长到 `255`，而默认的 `10` 也能支持到 `1M（100万）` 次访问 `counter` 才能达到 `255` 上限，这在大部分场景都是足够满足需求的。
+可以看到，当对数因子 `lfu_log_factor` 为 `100` 时，大概是 `10M（1000万）` 次访问才会将访问 `counter` 增长到 `255`，而默认的 `10` 也能支持到 `1M（100万）` 次访问 `counter` 才能达到 `255` 上限，这在大部分场景都是足够满足需求的。
 
 ### 访问频次递减
 如果访问频次 `counter` 只是一直在递增，那么迟早会全部都到 `255`，也就是说 `counter` 一直递增不能完全反应一个 `key` 的热度的，所以当某一个 `key` 一段时间不被访问之后，`counter` 也需要对应减少。
@@ -147,10 +146,14 @@ lfu-decay-time 1
 ```
 具体算法如下：
 
-1. 获取当前时间戳，转化为分钟后取低 `16` 位（为了方便后续计算，这个值记为 `now`）。
+1. 获取当前时间戳，转化为**分钟**后取低 `16` 位（为了方便后续计算，这个值记为 `now`）。
 2. 取出对象内的 `lru` 属性中的高 `16` 位（为了方便后续计算，这个值记为 `ldt`）。
-3. 当 `lru` > `now` 时，默认为过了一个周期（16位，最大65535)，则取差值`65535-ldt+now`；当`lru` <=`now`时，取差值`now-ldt`（为了方便后续计算，这个差值记为`idle_time `）。
-4. 取出配置文件中的`lfu_decay_time`值，然后计算：`idle_time / lfu_decay_time`（为了方便后续计算，这个值记为`num_periods`）。
+3. 当 `lru` > `now` 时，默认为过了一个周期（`16` 位，最大 `65535`)，则取差值 `65535-ldt+now`：当 `lru` <= `now` 时，取差值 `now-ldt`（为了方便后续计算，这个差值记为 `idle_time `）。
+4. 取出配置文件中的 `lfu_decay_time` 值，然后计算：`idle_time / lfu_decay_time`（为了方便后续计算，这个值记为`num_periods`）。
 5. 最后将`counter`减少：`counter - num_periods`。
 
 看起来这么复杂，其实计算公式就是一句话：取出当前的时间戳和对象中的 `lru` 属性进行对比，计算出当前多久没有被访问到，比如计算得到的结果是 `100` 分钟没有被访问，然后再去除配置参数 `lfu_decay_time`，如果这个配置默认为 `1`也即是 `100/1=100`，代表 `100` 分钟没访问，所以 `counter` 就减少 `100`。
+
+# 总结
+
+本文主要介绍了 `Redis` 过期键的处理策略，以及当服务器内存不够时 `Redis` 的 `8` 种淘汰策略，最后介绍了 `Redis` 中的两种主要的淘汰算法 `LRU` 和 `LFU`。

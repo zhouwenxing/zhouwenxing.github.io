@@ -58,7 +58,7 @@ maxmemory <bytes>
 | volatile-ttl    | 根据键值对象的 ttl 属性， 删除最近将要过期数据。 如果没有，则直接报错 |
 | noeviction      | 默认策略，不作任何处理，直接报错                             |
 
-PS：淘汰策略也可以直接使用命令 `config set maxmemory-policy <策略>` 来进行动态删除。
+PS：淘汰策略也可以直接使用命令 `config set maxmemory-policy <策略>` 来进行动态配置。
 
 ## LRU 算法
 `LRU` 全称为：`Least Recently Used`。即：最近最长时间未被使用。这个主要针对的是使用时间。

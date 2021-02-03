@@ -155,9 +155,9 @@ source /etc/profile //实时生效
 7. 如果没有报错则说明启动成功，启动之后默认会创建一个 `guest/guest` 账户，只能本地连接，所以还需要再重新创建一个用户，并给新用户授权（当然，我们也可以直接给 `guest` 用户授权）：
 
 ```java
-./rabbitmqctl add_user admin 123456   //创建用户admin
-./rabbitmqctl set_user_tags admin administrator  //添加标签
-./rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"  //授权
+/usr/local/rabbitmq_server-3.8.4/sbin/./rabbitmqctl add_user admin 123456   //创建用户admin
+/usr/local/rabbitmq_server-3.8.4/sbin/./rabbitmqctl set_user_tags admin administrator  //添加标签
+/usr/local/rabbitmq_server-3.8.4/sbin/./rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"  //授权
 ```
 
 8. `RabbitMQ` 默认还提供了可视化管理界面，需要手动开启一下，默认端口为 `15672`：
@@ -360,7 +360,7 @@ public class HelloRabbitController {
     private RabbitTemplate rabbitTemplate;
 
     @GetMapping(value="/send")
-    public String clearVipInfo(@RequestParam(value = "msg",defaultValue = "no message") String msg){
+    public String helloSend(@RequestParam(value = "msg",defaultValue = "no message") String msg){
         rabbitTemplate.convertAndSend("SIMPLE_QUEUE",msg);
         return "succ";
     }

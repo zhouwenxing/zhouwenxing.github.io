@@ -31,4 +31,5 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 5. [Redis中哈希分布不均匀该怎么办](https://zhouwenxing.github.io/redis/Redis中哈希分布不均匀该怎么办)
 6. [同一份数据，Redis为什么要存两次](https://zhouwenxing.github.io/redis/同一份数据，Redis为什么要存两次)
 7. [作为一款内存数据库，为什么断电后Redis数据不会丢失](https://zhouwenxing.github.io/redis/作为一款内存数据库，为什么断电后Redis数据不会丢失)
+8. [要想用活Redis，Lua脚本是绕不过去的坎](https://zhouwenxing.github.io/redis/要想用活Redis，Lua脚本是绕不过去的坎)
 

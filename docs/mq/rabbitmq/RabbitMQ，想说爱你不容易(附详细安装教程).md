@@ -149,21 +149,21 @@ source /etc/profile //实时生效
 6. 启动 `RabbitMQ` ，默认端口为 `6752`：
 
 ```java
-/usr/local/rabbitmq_server-3.8.4/sbin/./rabbitmq-server -detached  //在后台启动。根据自己实际路径选择，或者也可以选择service或者systemctl等命令启动
+rabbitmq-server -detached  //在后台启动。根据自己实际路径选择，或者也可以选择service或者systemctl等命令启动
 ```
 
 7. 如果没有报错则说明启动成功，启动之后默认会创建一个 `guest/guest` 账户，只能本地连接，所以还需要再重新创建一个用户，并给新用户授权（当然，我们也可以直接给 `guest` 用户授权）：
 
 ```java
-/usr/local/rabbitmq_server-3.8.4/sbin/./rabbitmqctl add_user admin 123456   //创建用户admin
-/usr/local/rabbitmq_server-3.8.4/sbin/./rabbitmqctl set_user_tags admin administrator  //添加标签
-/usr/local/rabbitmq_server-3.8.4/sbin/./rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"  //授权
+rabbitmqctl add_user admin 123456   //创建用户admin
+rabbitmqctl set_user_tags admin administrator  //添加标签
+rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"  //授权
 ```
 
 8. `RabbitMQ` 默认还提供了可视化管理界面，需要手动开启一下，默认端口为 `15672`：
 
 ```java
-./rabbitmq-plugins enable rabbitmq_management //启动后台管理系统插件（禁止的话换成disable即可）
+rabbitmq-plugins enable rabbitmq_management //启动后台管理系统插件（禁止的话换成disable即可）
 ```
 
 9. 开启插件之后，可以通过访问：`http://ip:15672/` 访问后台管理系统，并进行一些参数设置，账号密码就是上面添加的 `admin/123456`。

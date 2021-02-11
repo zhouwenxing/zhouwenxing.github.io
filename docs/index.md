@@ -21,6 +21,7 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 1. [RabbitMQ，想说爱你不容易](https://zhouwenxing.github.io/mq/rabbitmq/RabbitMQ，想说爱你不容易(附详细安装教程))
 2. [RabbitMQ不讲武德，发个消息也这么多花招](https://zhouwenxing.github.io/mq/rabbitmq/RabbitMQ不讲武德，发个消息也这么多花招)
 3. [如何用RabbitMQ实现延迟队列](https://zhouwenxing.github.io/mq/rabbitmq/如何用RabbitMQ实现延迟队列)
+4. [高可用RabbitMQ集群的搭建及原理分析](https://zhouwenxing.github.io/mq/rabbitmq/高可用RabbitMQ集群的搭建及原理分析)
 
 # Redis系列
 

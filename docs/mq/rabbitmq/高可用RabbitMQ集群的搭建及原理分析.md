@@ -1,7 +1,3 @@
-[TOC]
-
-
-
 # 前言
 
 任何一个服务，如果仅仅是单机部署，那么性能总是有上限的，`RabbitMQ` 也不例外，当单台 `RabbitMQ` 服务处理消息的能力到达瓶颈时，可以通过集群来实现高可用和负载均衡。
@@ -26,6 +22,53 @@ PS：元数据，指的是包括队列名字属性、交换机的类型名字属
 ## 镜像队列模式
 
 镜像队列模式下，节点之间不仅仅会同步元数据，消息内容也会在镜像节点间同步，可用性更高。这种方案提升了可用性的同时，因为同步数据之间也会带来网络开销从而在一定程度上会影响到性能。
+
+# RabbitMQ 集群搭建
+
+接下来让我们一起尝试搭建一个 `RabbitMQ` 集群：
+
+1. 假如之前启动过单机版，那么先删除旧数据 `rm -rf /var/lib/rabbitmq/mnesia` 或者删除安装目录内的 `var/lib/rabbitmq/mnesia`，我本机是安装在安装目录下，所以执行的是命令 `rm -rf /usr/local/rabbitmq_server-3.8.4/var/lib/rabbitmq/mnesia/`。
+
+2. 接下来需要启动以下三个命令来启动三个不同端口号的 `RabbitMQ` 服务，除了指定 `RabbitMQ` 服务端口之后还需要额外指定后台管理系统的端口，而且必须指定 `node` 名的前缀，因为集群中是以节点名来进行通信的，所以节点名必须唯一，默认的节点名是 `rabbit@hostname`，下面的命令表示指定了前缀：
+
+```properties
+RABBITMQ_NODE_PORT=5672 RABBITMQ_SERVER_START_ARGS="-rabbitmq_management listener [{port,15672}]" RABBITMQ_NODENAME=rabbit1 rabbitmq-server -detached
+RABBITMQ_NODE_PORT=5673 RABBITMQ_SERVER_START_ARGS="-rabbitmq_management listener [{port,15673}]" RABBITMQ_NODENAME=rabbit2 rabbitmq-server -detached
+RABBITMQ_NODE_PORT=5674 RABBITMQ_SERVER_START_ARGS="-rabbitmq_management listener [{port,15674}]" RABBITMQ_NODENAME=rabbit3 rabbitmq-server -detached
+```
+
+启动之后进入 `/usr/local/rabbitmq_server-3.8.4/var/lib/rabbitmq/mnesia/` 目录查看，发现创建了 `3` 个节点信息：
+
+![](image/4/cluster-node-file.png)
+
+另外通过 `ps -ef | grep rabbit` 也可以发现三个服务进程被启动。
+
+3. 现在启动的三个服务彼此之间还没有联系，现在我们需要以其中一个节点为主节点，然后其余两个节点需要加入主节点，形成一个集群服务，需要注意的是加入集群之前，需要重置节点信息，即不允许带有数据的节点加入集群。
+
+```java
+//rabbit2 节点重置后加入集群
+rabbitmqctl -n rabbit2 stop_app
+rabbitmqctl -n rabbit2 reset
+rabbitmqctl -n rabbit2 join_cluster --ram rabbit1@`hostname -s` //--ram 表示这是一个内存节点
+rabbitmqctl -n rabbit2 start_app
+
+rabbitmqctl -n rabbit3 stop_app
+rabbitmqctl -n rabbit3 reset
+rabbitmqctl -n rabbit3 join_cluster --disc rabbit1@`hostname -s` //--disc表示磁盘节点（默认也是磁盘节点）
+rabbitmqctl -n rabbit3 start_app
+```
+
+4. 成功之后，执行命令 `rabbitmqctl cluster_status` 查询节点 `rabbit1` 的状态，可以看到下图所示，两个磁盘节点一个内存节点：
+
+![](image/4/cluster-info.jpg)
+
+5. 需要注意的是，到这里启动的集群只是默认的普通集群，如果想要配置成镜像集群，则需要执行以下命令：
+
+```java
+rabbitmqctl -n rabbit1 set_policy ha-all "^" '{"ha-mode":"all"}'
+```
+
+到这里 `RabbitMQ` 集群就算搭建完成了，不过需要注意的是，这里因为是单机版本，所以没有考虑 `.erlang.cookie` 文件保持一致。
 
 # 基于 HAProxy + Keepalived 高可用集群
 
@@ -69,18 +112,6 @@ PS：元数据，指的是包括队列名字属性、交换机的类型名字属
 
 `VRRP` 协议即虚拟路由冗余协议（Virtual Router Redundancy Protocol）。`Keepalived` 中提供的虚拟 `IP` 机制就属于 `VRRP`，它是为了避免路由器出现单点故障的一种容错协议。
 
-# RabbitMQ + HAProxy + Keepalived 集群搭建
-
-接下来，我们就一起来搭建一个 `RabbitMQ` 集群。
-
-Keepalived 下载地址 https://www.keepalived.org/download.html
-
-
-
-http://download.openpkg.org/components/cache/haproxy/
-
-1. 
-
-
-
 # 总结
+
+本文主要介绍了 `RaabbitMQ` 集群的相关知识，并对比了普通集群和镜像集群的区别，最后通过实践搭建了一个 `RabbitMQ` 集群，同时也介绍了普通的集群存在一些不足，可以结合 `HAProxy` 和 `Keepalived` 组件来实现真正的高可用分布式集群服务。

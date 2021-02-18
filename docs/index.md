@@ -12,6 +12,7 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 1. 后台框架：Spring
 2. 消息队列：RabbitMQ
 3. 数据库：Redis
+4. Core Java
 
 # 博客
 ## Spring系列
@@ -23,7 +24,7 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 3. [如何用RabbitMQ实现延迟队列](https://zhouwenxing.github.io/mq/rabbitmq/如何用RabbitMQ实现延迟队列)
 4. [高可用RabbitMQ集群的搭建及原理分析](https://zhouwenxing.github.io/mq/rabbitmq/高可用RabbitMQ集群的搭建及原理分析)
 
-# Redis系列
+## Redis系列
 
 1. [Redis为什么这么快](https://zhouwenxing.github.io/redis/Redis为什么这么快)
 2. [一个简单的字符串，为什么 Redis 要设计的如此特别](https://zhouwenxing.github.io/redis/一个简单的字符串，为什么 Redis 要设计的如此特别)
@@ -35,3 +36,6 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 8. [要想用活Redis，Lua脚本是绕不过去的坎](https://zhouwenxing.github.io/redis/要想用活Redis，Lua脚本是绕不过去的坎)
 9. [内存耗尽后Redis会发生什么](https://zhouwenxing.github.io/redis/内存耗尽后Redis会发生什么)
 
+## Core Java
+
+1. [手把手轻松读懂HashMap源码](https://zhouwenxing.github.io/corejava/手把手轻松读懂HashMap源码)

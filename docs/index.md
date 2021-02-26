@@ -36,6 +36,7 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 8. [要想用活Redis，Lua脚本是绕不过去的坎](https://zhouwenxing.github.io/redis/要想用活Redis，Lua脚本是绕不过去的坎)
 9. [内存耗尽后Redis会发生什么](https://zhouwenxing.github.io/redis/内存耗尽后Redis会发生什么)
 10. [不能回滚的Redis事务还能用吗](https://zhouwenxing.github.io/redis/不能回滚的Redis事务还能用吗)
+11. [如何从10亿数据中快速判断是否存在某一个元素](https://zhouwenxing.github.io/redis/如何从10亿数据中快速判断是否存在某一个元素)
 
 ## Core Java
 

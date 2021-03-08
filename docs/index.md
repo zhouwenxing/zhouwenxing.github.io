@@ -13,6 +13,7 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 2. 消息队列：RabbitMQ
 3. 数据库：Redis
 4. Core Java
+5. 并发编程
 
 # 博客
 ## Spring系列
@@ -41,3 +42,7 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 ## Core Java
 
 1. [手把手轻松读懂HashMap源码](https://zhouwenxing.github.io/corejava/手把手轻松读懂HashMap源码)
+
+## 并发编程
+
+1. [助力面试之ConcurrentHashMap面试灵](https://zhouwenxing.github.io/concurrent/助力面试之ConcurrentHashMap面试灵魂拷问，你能扛多久)

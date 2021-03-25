@@ -9,7 +9,7 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 博客系列源码已经同步收录，欢迎 [**Star**](https://github.com/zhouwenxing/lonely-wolf-note.git) ！
 
 # 已收录博文技术栈(持续更新)
-1. 后台框架：Spring
+1. 后台框架：Spring，SpringBoot
 2. 消息队列：RabbitMQ
 3. 数据库：Redis
 4. Core Java
@@ -19,6 +19,10 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 ## Spring系列
 1. [Spring中毒太深，离开Spring我居然连最基本的接口都不会写了](https://zhouwenxing.github.io/spring/Spring中毒太深，离开Spring我居然连最基本的接口都不会写了)
 2. [最全的Spring依赖注入方式，你都会了吗](https://zhouwenxing.github.io/spring/最全的Spring依赖注入方式，你都会了吗)
+
+## SpringBoot 系列
+
+1. [SpringBoot自动装配原理分析，看完你也能手写一个starter组件](https://zhouwenxing.github.io/springboot/SpringBoot自动装配原理分析，看完你也能手写一个starter组件)
 
 ## RabbitMQ系列
 1. [RabbitMQ，想说爱你不容易](https://zhouwenxing.github.io/mq/rabbitmq/RabbitMQ，想说爱你不容易(附详细安装教程))

@@ -99,7 +99,7 @@ private IWolf iWolf;
 
 这个就是说本来应该注入一个类，但是 `Spring` 找到了三个，所以没法确认到底应该用哪一个。这个问题如何解决呢？
 
-解决思路主要有以下 ``5` 种：
+解决思路主要有以下 `5` 种：
 
 #### 通过配置文件和 @ConditionalOnProperty 注解实现
 
@@ -342,7 +342,7 @@ public class InterfaceInject2 {
 @Component
 public class InterfaceInject2 {
     @Bean
-    public MyElement test(IWolf iWolf){
+    public MyElement test(IWolf iWolf){//此时因为IWolf接口有多个实现类，会报错
         return new MyElement();
     }
 }

@@ -139,8 +139,8 @@ list-max-ziplist-size 1
 
 ## 列表对象常用操作命令
 
-- lpush key value1 value2：将一个或者多个 `value` 插入到列表 `key` 的头部，`key` 不存在则创建 `key`（`value2` 在`value1` 之后）。
-- lpushx key value1 value2：将一个或者多个 `value` 插入到列表 `key` 的头部，`key` 不存在则不做任何处理（`value2` 在`value1` 之后）。
+- lpush key value1 value2：将一个或者多个 `value` 插入到列表 `key` 的头部，`key` 不存在则创建 `key`（`value2` 在`value1` 之前）。
+- lpushx key value1 value2：将一个或者多个 `value` 插入到列表 `key` 的头部，`key` 不存在则不做任何处理（`value2` 在`value1` 之前）。
 - lpop key：移除并返回 `key` 值的列表头元素。
 - rpush key value1 value2：将一个或者多个 `value` 插入到列表 `key` 的尾部，`key` 不存在则创建 `key`（`value2` 在`value1` 之后）。
 - rpushx key value1 vaue2：将一个或者多个 `value` 插入到列表 `key` 的尾部，`key` 不存在则不做任何处理（`value2` 在`value1` 之后）。

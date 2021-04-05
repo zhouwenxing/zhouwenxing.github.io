@@ -23,6 +23,7 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 ## SpringBoot 系列
 
 1. [SpringBoot自动装配原理分析，看完你也能手写一个starter组件](https://zhouwenxing.github.io/springboot/SpringBoot自动装配原理分析，看完你也能手写一个starter组件)
+2. [面试官：聊一聊SpringBoot服务监控机制](https://zhouwenxing.github.io/springboot/面试官：聊一聊SpringBoot服务监控机制)
 
 ## RabbitMQ系列
 1. [RabbitMQ，想说爱你不容易](https://zhouwenxing.github.io/mq/rabbitmq/RabbitMQ，想说爱你不容易(附详细安装教程))

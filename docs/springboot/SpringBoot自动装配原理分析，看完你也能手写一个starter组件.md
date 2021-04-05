@@ -95,7 +95,7 @@ public class MyConfiguration {
 
 这个方法里面就是通过调用 `getCandidateConfigurations` 来获取候选的 `Bean`，并将其存为一个集合，最后经过去重，校验等一系列操作之后，被封装成 `AutoConfigurationEntry` 对象返回。
 
-继续进入 `getCandidateConfigurations` 方法，这时候就几乎看到输光了：
+继续进入 `getCandidateConfigurations` 方法，这时候就几乎看到曙光了：
 
 ![](image/1/1-5-loadspringfactories.png)
 

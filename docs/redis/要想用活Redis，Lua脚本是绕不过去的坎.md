@@ -37,7 +37,7 @@ publish tv myHome  //发布消息 myHome 到 tv 频道
 
 同时，还有以下 `2` 个命令可以查看当前客户端订阅的频道信息：
 
-- punsub channels [channel_name] ：查看当前服务器被订阅的频道。不带参数则返回所有频道，后面的参数可以使用通配符 `?` 或者 `*`。
+- pubsub channels [channel_name] ：查看当前服务器被订阅的频道。不带参数则返回所有频道，后面的参数可以使用通配符 `?` 或者 `*`。
 - pubsub numsub channel_name [channel_name]：查看指定频道的订阅数（可同时查看多个）。
 ### 实现原理分析
 客户端与其订阅的频道信息被保存在 `redisServer` 对象中的 `pubsub_channels` 属性中。

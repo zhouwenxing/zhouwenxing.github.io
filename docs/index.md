@@ -48,6 +48,7 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 ## Core Java
 
 1. [手把手轻松读懂HashMap源码](https://zhouwenxing.github.io/corejava/手把手轻松读懂HashMap源码)
+2. [Java字节流和字符流，是时候总结一下IO流了](https://zhouwenxing.github.io/corejava/Java字节流和字符流，是时候总结一下IO流了)
 
 ## 并发编程
 

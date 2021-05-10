@@ -45,6 +45,10 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 10. [不能回滚的Redis事务还能用吗](https://zhouwenxing.github.io/redis/不能回滚的Redis事务还能用吗)
 11. [如何从10亿数据中快速判断是否存在某一个元素](https://zhouwenxing.github.io/redis/如何从10亿数据中快速判断是否存在某一个元素)
 
+## Elasticsearch 系列
+
+1. [面试官：这些错误都没见过，还敢说会安装Elasticsearch？](https://zhouwenxing.github.io/Elasticsearch/面试官：这些错误都没见过，还敢说会安装Elasticsearch？)
+
 ## Core Java
 
 1. [手把手轻松读懂HashMap源码](https://zhouwenxing.github.io/corejava/手把手轻松读懂HashMap源码)

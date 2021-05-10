@@ -14,24 +14,25 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 3. 数据库：Redis
 4. Core Java
 5. 并发编程
+6. Elasticsearch
 
 # 博客
-## Spring系列
+## Spring
 1. [Spring中毒太深，离开Spring我居然连最基本的接口都不会写了](https://zhouwenxing.github.io/spring/Spring中毒太深，离开Spring我居然连最基本的接口都不会写了)
 2. [最全的Spring依赖注入方式，你都会了吗](https://zhouwenxing.github.io/spring/最全的Spring依赖注入方式，你都会了吗)
 
-## SpringBoot 系列
+## SpringBoot
 
 1. [SpringBoot自动装配原理分析，看完你也能手写一个starter组件](https://zhouwenxing.github.io/springboot/SpringBoot自动装配原理分析，看完你也能手写一个starter组件)
 2. [面试官：聊一聊SpringBoot服务监控机制](https://zhouwenxing.github.io/springboot/面试官：聊一聊SpringBoot服务监控机制)
 
-## RabbitMQ系列
+## RabbitMQ
 1. [RabbitMQ，想说爱你不容易](https://zhouwenxing.github.io/mq/rabbitmq/RabbitMQ，想说爱你不容易(附详细安装教程))
 2. [RabbitMQ不讲武德，发个消息也这么多花招](https://zhouwenxing.github.io/mq/rabbitmq/RabbitMQ不讲武德，发个消息也这么多花招)
 3. [如何用RabbitMQ实现延迟队列](https://zhouwenxing.github.io/mq/rabbitmq/如何用RabbitMQ实现延迟队列)
 4. [高可用RabbitMQ集群的搭建及原理分析](https://zhouwenxing.github.io/mq/rabbitmq/高可用RabbitMQ集群的搭建及原理分析)
 
-## Redis系列
+## Redis
 
 1. [Redis为什么这么快](https://zhouwenxing.github.io/redis/Redis为什么这么快)
 2. [一个简单的字符串，为什么 Redis 要设计的如此特别](https://zhouwenxing.github.io/redis/一个简单的字符串，为什么 Redis 要设计的如此特别)
@@ -45,10 +46,6 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 10. [不能回滚的Redis事务还能用吗](https://zhouwenxing.github.io/redis/不能回滚的Redis事务还能用吗)
 11. [如何从10亿数据中快速判断是否存在某一个元素](https://zhouwenxing.github.io/redis/如何从10亿数据中快速判断是否存在某一个元素)
 
-## Elasticsearch 系列
-
-1. [面试官：这些错误都没见过，还敢说会安装Elasticsearch？](https://zhouwenxing.github.io/Elasticsearch/面试官：这些错误都没见过，还敢说会安装Elasticsearch？)
-
 ## Core Java
 
 1. [手把手轻松读懂HashMap源码](https://zhouwenxing.github.io/corejava/手把手轻松读懂HashMap源码)
@@ -58,3 +55,7 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 ## 并发编程
 
 1. [助力面试之ConcurrentHashMap面试灵魂拷问，你能扛多久](https://zhouwenxing.github.io/concurrent/助力面试之ConcurrentHashMap面试灵魂拷问，你能扛多久)
+
+## Elasticsearch
+
+1. [面试官：这些错误都没见过，还敢说会安装Elasticsearch？](https://zhouwenxing.github.io/Elasticsearch/面试官：这些错误都没见过，还敢说会安装Elasticsearch？)

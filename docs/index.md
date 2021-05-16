@@ -35,7 +35,7 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 ## Redis
 
 1. [Redis为什么这么快](https://zhouwenxing.github.io/redis/Redis为什么这么快)
-2. [一个简单的字符串，为什么 Redis 要设计的如此特别](https://zhouwenxing.github.io/redis/一个简单的字符串，为什么 Redis 要设计的如此特别)
+2. [为什么Redis要把字符串设计的如此特别](https://zhouwenxing.github.io/redis/为什么Redis要把字符串设计的如此特别)
 3. [牺牲速度来节省内存，Redis是觉得自己太快了吗](https://zhouwenxing.github.io/redis/牺牲速度来节省内存，Redis是觉得自己太快了吗)
 4. [为了加快速度，Redis 都做了哪些“变态”设计](https://zhouwenxing.github.io/redis/为了加快速度，Redis都做了哪些变态设计)
 5. [Redis中哈希分布不均匀该怎么办](https://zhouwenxing.github.io/redis/Redis中哈希分布不均匀该怎么办)
@@ -58,6 +58,6 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 
 ## Elasticsearch
 
-1. [面试官：这些错误都没见过，还敢说会安装Elasticsearch？](https://zhouwenxing.github.io/Elasticsearch/面试官：这些错误都没见过，还敢说会安装Elasticsearch？)
+1. [这些错误都没见过，还敢说会安装Elasticsearch？](https://zhouwenxing.github.io/Elasticsearch/这些错误都没见过，还敢说会安装Elasticsearch？)
 2. [Elasticsearch入门，看这一篇就够了](https://zhouwenxing.github.io/Elasticsearch/Elasticsearch入门，看这一篇就够了)
 

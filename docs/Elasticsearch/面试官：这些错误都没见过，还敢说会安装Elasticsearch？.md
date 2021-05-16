@@ -16,7 +16,7 @@
 
 `Lucene` 的原作者是 `Doug Cutting`，最初采用的是 `Java` 语言编写，在 `2001` 年的时候，`Lucene` 有了一定的用户基础，作者将其捐献给了 `Apache`。慢慢的，`Apache Lucene` 也发展出了 `C++` ，`C#`，`Python` 等语言版本。
 
- `Apache Lucene` 有着非常活跃的社区，而且因为其开源，并且已经非常成熟，所以除 `ElasticSearch` 之外，`Solr` 也是基于 `Apache Lucene` 实现的搜索（可以类比一下 `MySQL` 的存储引擎，`Lucence` 相当于查询引擎层，而 `ElasticSearch` 和 `Solr` 就相当于 `MySQL` 的服务层）。
+`Apache Lucene` 有着非常活跃的社区，而且因为其开源，并且已经非常成熟，所以除 `ElasticSearch` 之外，`Solr` 也是基于 `Apache Lucene` 实现的搜索（可以类比一下 `MySQL` 的存储引擎，`Lucence` 相当于查询引擎层，而 `ElasticSearch` 和 `Solr` 就相当于 `MySQL` 的服务层）。
 
 ## 常见名词
 
@@ -112,7 +112,9 @@ bootstrap check failure [1] of [1]: the default discovery settings are unsuitabl
 
 #### 本地回环地址 
 
-non-loopback address 即本地回环地址，本地回环地址指的是以 `127` 开头的 `ip` 地址，大部分情况下都会将本地回环地址指向 `127.0.0.1`（`ipv6` 中则等价于 `::1`），同时再指向 `localhost`，所以在部分人的认知里 `127.0.0.1` 等价于 `localhost`。实际上回环地址不一定是 `127.0.0.1`，而 `127.0.0.1` 也不一定等价于 `localhost`，这些都要看具体配置。
+non-loopback address 即本地回环地址，本地回环地址指的是以 `127` 开头的 `ip` 地址，大部分情况下都会将本地回环地址指向 `127.0.0.1`（`ipv6` 中则等价于 `::1`），其他的 `127.xxx.xxx.xxx` 则很少使用，本地回环数据会经过传输层（`tcp` 等）和网络层（`ip`），而不会经过网卡等硬件设备，所以一般使用本地回环来测试本机网络配置（因为本地回环地址可以在没有任何硬件网络接口的情况下进行软件测试和本地服务）。
+
+而 `localhost`，实际上表示的是主机名，一般在 `hosts` 文件中进行配置，通常默认会指向 `127.0.0.1` 这个回环地址，所以会导致我们将 `127.0.0.1` 等价于 `localhost`，然而实际上这个“等价关系”是可以被修改的。
 
 ### 发现集群信息配置
 

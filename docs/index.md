@@ -59,3 +59,5 @@ GitHub会陆续整理记录日常总结，欢迎 [**Star**](https://github.com/z
 ## Elasticsearch
 
 1. [面试官：这些错误都没见过，还敢说会安装Elasticsearch？](https://zhouwenxing.github.io/Elasticsearch/面试官：这些错误都没见过，还敢说会安装Elasticsearch？)
+2. [Elasticsearch入门，看这一篇就够了](https://zhouwenxing.github.io/Elasticsearch/Elasticsearch入门，看这一篇就够了)
+
